@@ -182,6 +182,25 @@
   .d1 { transition-delay: 0.1s; } .d2 { transition-delay: 0.22s; } .d3 { transition-delay: 0.34s; }
 
 /* RESPONSIVE */
+
+/* ── Base para imagem do about (fora de qualquer media query) ── */
+.about-photo-placeholder {
+  width: 100%;
+  height: 100%;
+  min-height: unset;
+  display: block;
+  background: none;
+  padding: 0;
+}
+.about-photo-placeholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 15%;
+  display: block;
+}
+
+/* ── Tablet ── */
 @media (max-width: 960px) {
   nav { padding: 18px 32px; }
 
@@ -200,16 +219,18 @@
   .hero-photo::after {
     background: linear-gradient(to top, var(--white) 8%, transparent 60%);
   }
-  .hero-content {
-    padding: 24px 32px 64px;
-  }
-  .hero-names { margin-bottom: 32px; }
-  .hero-date  { margin-bottom: 40px; }
+  .hero-content { padding: 24px 32px 64px; }
+  .hero-names   { margin-bottom: 32px; }
+  .hero-date    { margin-bottom: 40px; }
 
   /* About */
   .about-hero { grid-template-columns: 1fr; }
-  .about-photo-wrap { aspect-ratio: unset; border-radius: 10px 10px 0 0; }
-  .about-photo-placeholder { min-height: 280px; }
+  .about-photo-wrap {
+    aspect-ratio: 4 / 3;
+    max-height: 280px;        /* limita a altura */
+    overflow: hidden;
+    border-radius: 10px 10px 0 0;
+  }
   .about-text-panel {
     border-radius: 0 0 10px 10px;
     padding: 40px 32px;
@@ -232,10 +253,10 @@
   section { padding: 80px 32px; }
 }
 
+/* ── Mobile ── */
 @media (max-width: 600px) {
-  /* Nav — hambúrguer simples via checkbox hack */
+  /* Nav hambúrguer */
   nav { padding: 16px 24px; position: relative; }
-
   .nav-hamburger {
     display: flex;
     flex-direction: column;
@@ -250,9 +271,8 @@
     background: var(--charcoal);
     transition: transform 0.3s, opacity 0.3s;
   }
-
   .nav-links {
-    display: flex !important;          /* sobrescreve o display:none anterior */
+    display: flex !important;
     flex-direction: column;
     gap: 0;
     position: fixed;
@@ -266,73 +286,50 @@
     z-index: 150;
   }
   .nav-links li { border-bottom: 1px solid var(--line); width: 100%; text-align: center; }
-  .nav-links a {
-    display: block;
-    padding: 20px 0;
-    font-size: 13px;
-    letter-spacing: 0.22em;
-  }
-
-  /* Abre menu quando o input estiver marcado */
+  .nav-links a  { display: block; padding: 20px 0; font-size: 13px; letter-spacing: 0.22em; }
   #nav-toggle { display: none; }
-  #nav-toggle:checked ~ .nav-links {
-    opacity: 1;
-    pointer-events: auto;
-  }
+  #nav-toggle:checked ~ .nav-links { opacity: 1; pointer-events: auto; }
   #nav-toggle:checked ~ .nav-hamburger span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
   #nav-toggle:checked ~ .nav-hamburger span:nth-child(2) { opacity: 0; }
   #nav-toggle:checked ~ .nav-hamburger span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
   /* Hero */
-  .hero-photo { height: 38vh; }
+  .hero-photo   { height: 38vh; }
   .hero-content { padding: 20px 24px 56px; }
-  .hero-label { margin-bottom: 28px; font-size: 10px; }
-  .hero-names { font-size: clamp(44px, 11vw, 64px); margin-bottom: 24px; }
-  .hero-date  { font-size: 11px; margin-bottom: 32px; }
+  .hero-label   { margin-bottom: 28px; font-size: 10px; }
+  .hero-names   { font-size: clamp(44px, 11vw, 64px); margin-bottom: 24px; }
+  .hero-date    { font-size: 11px; margin-bottom: 32px; }
 
   /* Countdown */
-  .countdown { gap: 10px; }
-  .countdown-num { font-size: 32px; }
-  .countdown-sep { font-size: 28px; }
-  .countdown-label { font-size: 8px; }
+  .countdown      { gap: 10px; }
+  .countdown-num  { font-size: 32px; }
+  .countdown-sep  { font-size: 28px; }
+  .countdown-label{ font-size: 8px; }
 
   /* About */
-  .about-stats { grid-template-columns: 1fr; }
-  .about-stat  { padding: 32px 24px; }
+  .about-photo-wrap {
+    aspect-ratio: 3 / 2;
+    max-height: 220px;        /* ainda menor no celular */
+  }
+  .about-photo-placeholder img {
+    object-position: center 10%; /* ajusta para mostrar os rostos */
+  }
+  .about-stats    { grid-template-columns: 1fr; }
+  .about-stat     { padding: 32px 24px; }
   .about-stat-num { font-size: 42px; }
 
   /* Gifts */
-  .gifts-grid { grid-template-columns: 1fr; }
-  .pix-banner { padding: 32px 24px; }
-  .pix-banner-title { font-size: 24px; }
+  .gifts-grid      { grid-template-columns: 1fr; }
+  .pix-banner      { padding: 32px 24px; }
+  .pix-banner-title{ font-size: 24px; }
 
   /* Local */
   .venue-name { font-size: 36px; }
   .local-map  { height: 260px; }
 
   /* Footer */
-  footer { padding: 48px 24px; }
+  footer        { padding: 48px 24px; }
   .footer-names { font-size: 30px; }
 
   section { padding: 64px 24px; }
-  @media (max-width: 960px) {
-  .about-photo-wrap {
-    aspect-ratio: 3 / 2;
-    border-radius: 10px 10px 0 0;
-    overflow: hidden;
-  }
-
-  .about-photo-placeholder {
-    min-height: unset;
-    aspect-ratio: unset;
-  }
 }
-
-@media (max-width: 600px) {
-  .about-photo-wrap {
-    aspect-ratio: 4 / 3;
-  }
-}
-}
-
-  
