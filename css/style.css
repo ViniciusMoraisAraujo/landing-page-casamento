@@ -396,9 +396,10 @@ footer { background: var(--charcoal); color: var(--white); padding: 64px 60px; t
   section { padding: 64px 24px; }
 
   /* Nav hambúrguer */
-nav {
+  nav {
     padding: 16px 24px;
     display: flex; align-items: center; justify-content: space-between;
+    z-index: 200;  /* garante que a nav fica na frente */
   }
 
   #nav-toggle { display: none; }
@@ -412,18 +413,26 @@ nav {
     background: var(--charcoal); transition: transform 0.3s, opacity 0.3s;
   }
 
-  .nav-links {
+    .nav-links {
     display: flex !important; flex-direction: column;
-    position: fixed; inset: 0; background: var(--white);
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;  /* mais explícito que inset:0 */
+    width: 100vw; height: 100vh;            /* força ocupar tela toda */
+    background: var(--white);
     align-items: center; justify-content: center;
     gap: 0; opacity: 0; pointer-events: none;
-    transition: opacity 0.35s; z-index: 150;
+    transition: opacity 0.35s;
+    z-index: 999;  /* máximo, acima de tudo */
   }
+
   .nav-links li  { border-bottom: 1px solid var(--line); width: 100%; text-align: center; }
   .nav-links a   { display: block; padding: 20px 0; font-size: 13px; letter-spacing: 0.22em; }
 
   /* Classes controladas por JS */
-  .nav-open .nav-links { opacity: 1; pointer-events: auto; }
+  .nav-open .nav-links {
+    opacity: 1;
+    pointer-events: auto;
+  }
   .nav-open .nav-hamburger span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
   .nav-open .nav-hamburger span:nth-child(2) { opacity: 0; }
   .nav-open .nav-hamburger span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
