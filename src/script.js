@@ -22,12 +22,12 @@ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 // GIFTS
 // ── PERSONALIZE AQUI: altere name, price e image de cada presente ──
 const gifts = [
-  { name:'Cota Lua de Mel',     price:'R$ 500,00', img:'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80' },
-  { name:'Jantar Romântico',    price:'R$ 250,00', img:'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80' },
-  { name:'Passeio de Barco',    price:'R$ 350,00', img:'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&q=80' },
-  { name:'Brinde com Champagne',price:'R$ 150,00', img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80' },
-  { name:'SPA para o Casal',    price:'R$ 400,00', img:'https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=600&q=80' },
-  { name:'Ajudinha para a Casa',price:'R$ 200,00', img:'https://images.unsplash.com/photo-1554995207-c18c203602cb?w=600&q=80' },
+  { name:'Cota Lua de Mel',     price:'R$ 500,00', img:'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80', pix:'analuizaalves188@gmail.com' },
+  { name:'Jantar Romântico',    price:'R$ 250,00', img:'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80', pix:'analuizaalves188@gmail.com' },
+  { name:'Passeio de Barco',    price:'R$ 350,00', img:'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&q=80', pix:'analuizaalves188@gmail.com' },
+  { name:'Brinde com Champagne',price:'R$ 150,00', img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80', pix:'analuizaalves188@gmail.com' },
+  { name:'SPA para o Casal',    price:'R$ 400,00', img:'https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=600&q=80', pix:'analuizaalves188@gmail.com' },
+  { name:'Ajudinha para a Casa',price:'R$ 200,00', img:'https://images.unsplash.com/photo-1554995207-c18c203602cb?w=600&q=80', pix:'analuizaalves188@gmail.com' },
 ];
 
 const grid = document.getElementById('gifts-grid');
@@ -53,7 +53,7 @@ pix.innerHTML = `
   </div>
   <div class="pix-box">
     <div class="pix-box-label">Chave Pix</div>
-    <div class="pix-box-key">seupix@email.com</div>
+    <div class="pix-box-key">analuizaalves188@gmail.com</div>
   </div>
 `;
 grid.appendChild(pix);
@@ -79,4 +79,51 @@ function pick(i){
   chosen.add(i);
   const cards = grid.querySelectorAll('.gift-card');
   draw(cards[i], gifts[i], i);
+}
+
+// MODAL PIX
+const modal = document.createElement('div');
+modal.id = 'pix-modal';
+modal.innerHTML = `
+  <div class="pix-modal-backdrop"></div>
+  <div class="pix-modal-box">
+    <button class="pix-modal-close" onclick="closeModal()">✕</button>
+    <div class="pix-modal-label">Presente escolhido</div>
+    <div class="pix-modal-gift-name" id="modal-gift-name"></div>
+    <div class="pix-modal-price" id="modal-gift-price"></div>
+    <div class="pix-modal-divider"></div>
+    <div class="pix-modal-instruction">Faça o Pix com o valor do presente:</div>
+    <div class="pix-modal-key-wrap">
+      <div class="pix-modal-key" id="modal-pix-key"></div>
+      <button class="pix-modal-copy" id="modal-copy-btn" onclick="copyPix()">Copiar chave</button>
+    </div>
+    <p class="pix-modal-thanks">Obrigado pelo carinho! 🌿<br>Cada presente é recebido com muito amor.</p>
+  </div>
+`;
+document.body.appendChild(modal);
+
+modal.querySelector('.pix-modal-backdrop').addEventListener('click', closeModal);
+
+function pick(i) {
+  const g = gifts[i];
+  document.getElementById('modal-gift-name').textContent = g.name;
+  document.getElementById('modal-gift-price').textContent = g.price;
+  document.getElementById('modal-pix-key').textContent = g.pix;
+  document.getElementById('modal-copy-btn').textContent = 'Copiar chave';
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  modal.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function copyPix() {
+  const key = document.getElementById('modal-pix-key').textContent;
+  navigator.clipboard.writeText(key).then(() => {
+    const btn = document.getElementById('modal-copy-btn');
+    btn.textContent = 'Copiado ✓';
+    setTimeout(() => btn.textContent = 'Copiar chave', 2000);
+  });
 }
