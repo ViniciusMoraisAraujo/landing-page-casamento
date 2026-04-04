@@ -4,7 +4,7 @@
     --mid: #5A5850; --light: #A8A49A; --line: #DDD9D0;
     --sage: #00674F; --sage-light: #00674F;
   }
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; overflow: hidden; }
   body { font-family: 'Jost', sans-serif; background: var(--white); color: var(--charcoal); overflow-x: hidden; }
 
   /* NAV */
@@ -336,30 +336,32 @@
 /* ── Mobile ── */
 @media (max-width: 600px) {
   /* Nav hambúrguer */
-  nav { padding: 16px 24px; position: relative; }
-  .nav-hamburger {
+   nav {
+    padding: 16px 24px;
+    position: relative;
     display: flex;
+    align-items: center;
+    justify-content: space-between;  /* logo à esquerda, hambúrguer à direita */
+  }
+
+  .nav-hamburger {
+    display: flex;          /* aparece só no mobile */
     flex-direction: column;
     gap: 5px;
     cursor: pointer;
     z-index: 200;
+    position: relative;     /* tira do fluxo fixo que causava bug */
   }
-  .nav-hamburger span {
-    display: block;
-    width: 24px;
-    height: 1.5px;
-    background: var(--charcoal);
-    transition: transform 0.3s, opacity 0.3s;
-  }
+
   .nav-links {
     display: flex !important;
     flex-direction: column;
-    gap: 0;
     position: fixed;
     inset: 0;
     background: var(--white);
     align-items: center;
     justify-content: center;
+    gap: 0;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.35s;
