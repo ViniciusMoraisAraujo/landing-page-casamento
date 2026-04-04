@@ -315,6 +315,24 @@
   .footer-names { font-size: 30px; }
 
   section { padding: 64px 24px; }
+  @media (max-width: 960px) {
+  .about-photo-wrap {
+    aspect-ratio: 3 / 2;
+    border-radius: 10px 10px 0 0;
+    overflow: hidden;
+  }
+
+  .about-photo-placeholder {
+    min-height: unset;
+    aspect-ratio: unset;
+  }
+}
+
+@media (max-width: 600px) {
+  .about-photo-wrap {
+    aspect-ratio: 4 / 3;
+  }
+}
 }
 
   
