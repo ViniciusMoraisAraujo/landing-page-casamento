@@ -127,3 +127,19 @@ function copyPix() {
     setTimeout(() => btn.textContent = 'Copiar chave', 2000);
   });
 }
+
+// NAV HAMBÚRGUER
+const navbar   = document.getElementById('navbar');
+const hamburger = document.querySelector('.nav-hamburger');
+const navLinks  = document.querySelector('.nav-links');
+
+hamburger.addEventListener('click', () => {
+  navbar.classList.toggle('nav-open');
+});
+
+// Fecha ao clicar em qualquer link
+navLinks.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    navbar.classList.remove('nav-open');
+  });
+});

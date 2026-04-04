@@ -396,11 +396,13 @@ footer { background: var(--charcoal); color: var(--white); padding: 64px 60px; t
   section { padding: 64px 24px; }
 
   /* Nav hambúrguer */
-  nav {
+nav {
     padding: 16px 24px;
     display: flex; align-items: center; justify-content: space-between;
   }
+
   #nav-toggle { display: none; }
+
   .nav-hamburger {
     display: flex; flex-direction: column; gap: 5px;
     cursor: pointer; z-index: 200;
@@ -409,21 +411,26 @@ footer { background: var(--charcoal); color: var(--white); padding: 64px 60px; t
     display: block; width: 24px; height: 1.5px;
     background: var(--charcoal); transition: transform 0.3s, opacity 0.3s;
   }
+
   .nav-links {
-    display: flex !important; flex-direction: column; gap: 0;
+    display: flex !important; flex-direction: column;
     position: fixed; inset: 0; background: var(--white);
     align-items: center; justify-content: center;
-    opacity: 0; pointer-events: none; transition: opacity 0.35s; z-index: 150;
+    gap: 0; opacity: 0; pointer-events: none;
+    transition: opacity 0.35s; z-index: 150;
   }
   .nav-links li  { border-bottom: 1px solid var(--line); width: 100%; text-align: center; }
   .nav-links a   { display: block; padding: 20px 0; font-size: 13px; letter-spacing: 0.22em; }
-  #nav-toggle:checked ~ .nav-links { opacity: 1; pointer-events: auto; }
-  #nav-toggle:checked ~ .nav-hamburger span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-  #nav-toggle:checked ~ .nav-hamburger span:nth-child(2) { opacity: 0; }
-  #nav-toggle:checked ~ .nav-hamburger span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+  /* Classes controladas por JS */
+  .nav-open .nav-links { opacity: 1; pointer-events: auto; }
+  .nav-open .nav-hamburger span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .nav-open .nav-hamburger span:nth-child(2) { opacity: 0; }
+  .nav-open .nav-hamburger span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
 
   /* Hero */
-  .hero-photo   { height: 38vh; }
+  .hero-photo   { height: 38vh; border-radius: 16px; }
   .hero-content { padding: 20px 24px 56px; }
   .hero-label   { margin-bottom: 28px; font-size: 10px; }
   .hero-names   { font-size: clamp(44px, 11vw, 64px); margin-bottom: 24px; }
