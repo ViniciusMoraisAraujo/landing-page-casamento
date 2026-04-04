@@ -4,7 +4,10 @@
     --mid: #5A5850; --light: #A8A49A; --line: #DDD9D0;
     --sage: #00674F; --sage-light: #00674F;
   }
-  html { scroll-behavior: smooth; overflow: clip; }
+  * {
+  outline: 1px solid red;
+}
+  html { scroll-behavior: smooth; }
   body { font-family: 'Jost', sans-serif; background: var(--white); color: var(--charcoal); overflow-x: hidden; }
 
   /* NAV */
@@ -336,7 +339,8 @@
 /* ── Mobile ── */
 @media (max-width: 600px) {
   /* Nav hambúrguer */
-   nav {
+  nav { padding: 16px 24px; position: relative; }
+  nav {
     padding: 16px 24px;
     position: relative;
     display: flex;
