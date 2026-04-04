@@ -306,13 +306,13 @@
   .countdown-sep  { font-size: 28px; }
   .countdown-label{ font-size: 8px; }
 
-  /* About */
+  /* About */  
   .about-photo-wrap {
-    aspect-ratio: 3 / 2;
-    max-height: 220px;        /* ainda menor no celular */
+    aspect-ratio: 4 / 3;      /* um pouco mais alto que 16/9 no celular */
   }
+
   .about-photo-placeholder img {
-    object-position: center 10%; /* ajusta para mostrar os rostos */
+    object-position: center 20%;
   }
   .about-stats    { grid-template-columns: 1fr; }
   .about-stat     { padding: 32px 24px; }
