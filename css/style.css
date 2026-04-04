@@ -4,7 +4,7 @@
     --mid: #5A5850; --light: #A8A49A; --line: #DDD9D0;
     --sage: #00674F; --sage-light: #00674F;
   }
-  html { scroll-behavior: smooth; overflow: hidden; }
+  html { scroll-behavior: smooth; overflow: clip; }
   body { font-family: 'Jost', sans-serif; background: var(--white); color: var(--charcoal); overflow-x: hidden; }
 
   /* NAV */
