@@ -24,9 +24,9 @@ const gifts = [
   { name:'Cota Lua de Mel',     price:'R$ 200,00', img:'/assets/lua-de-mel.png', pix:'analuizaalves188@gmail.com' },
   { name:'Comprar presentes para noiva de TPM',    price:'R$ 100,00', img:'/assets/acalmar-tpm-casamento.jpeg', pix:'analuizaalves188@gmail.com' },
   { name:'Viagem para o Chile',    price:'R$ 6000,00', img:'/assets/viagem-chile.png', pix:'analuizaalves188@gmail.com' },
-  { name:'Todo presente é bem vindo',price:'R$ 0,00', img:'/assets/todo-presente.png', pix:'analuizaalves188@gmail.com' },
   { name:'SPA para o Casal',    price:'R$ 400,00', img:'/assets/spa-casal-casamento.png', pix:'analuizaalves188@gmail.com' },
   { name:'Ajudinha para a Casa',price:'R$ 50,00', img:'/assets/presentes-para-casa.png', pix:'analuizaalves188@gmail.com' },
+  { name:'Todo presente é bem vindo',price:'R$ 0,00', img:'/assets/todo-presente.png', pix:'analuizaalves188@gmail.com' },
 ];
 
 const grid = document.getElementById('gifts-grid');
