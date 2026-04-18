@@ -20,14 +20,13 @@ const obs = new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&e.targe
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 
 // GIFTS
-// ── PERSONALIZE AQUI: altere name, price e image de cada presente ──
 const gifts = [
-  { name:'Cota Lua de Mel',     price:'R$ 500,00', img:'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80', pix:'analuizaalves188@gmail.com' },
-  { name:'Jantar Romântico',    price:'R$ 250,00', img:'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80', pix:'analuizaalves188@gmail.com' },
-  { name:'Passeio de Barco',    price:'R$ 350,00', img:'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&q=80', pix:'analuizaalves188@gmail.com' },
-  { name:'Brinde com Champagne',price:'R$ 150,00', img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80', pix:'analuizaalves188@gmail.com' },
-  { name:'SPA para o Casal',    price:'R$ 400,00', img:'https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=600&q=80', pix:'analuizaalves188@gmail.com' },
-  { name:'Ajudinha para a Casa',price:'R$ 200,00', img:'https://images.unsplash.com/photo-1554995207-c18c203602cb?w=600&q=80', pix:'analuizaalves188@gmail.com' },
+  { name:'Cota Lua de Mel',     price:'R$ 200,00', img:'/assets/lua-de-mel.png', pix:'analuizaalves188@gmail.com' },
+  { name:'Comprar presentes para noiva de TPM',    price:'R$ 100,00', img:'/assets/acalmar-tpm-casamento.jpeg', pix:'analuizaalves188@gmail.com' },
+  { name:'Viagem para o Chile',    price:'R$ 6000,00', img:'/assets/viagem-chile.png', pix:'analuizaalves188@gmail.com' },
+  { name:'Todo presente é bem vindo',price:'R$ 0,00', img:'/assets/todo-presente.png', pix:'analuizaalves188@gmail.com' },
+  { name:'SPA para o Casal',    price:'R$ 400,00', img:'/assets/spa-casal-casamento.png', pix:'analuizaalves188@gmail.com' },
+  { name:'Ajudinha para a Casa',price:'R$ 50,00', img:'/assets/presentes-para-casa.png', pix:'analuizaalves188@gmail.com' },
 ];
 
 const grid = document.getElementById('gifts-grid');
