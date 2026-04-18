@@ -235,9 +235,6 @@ section { padding: 120px 60px; }
 .gift-img-wrap img {
   width: 100%; height: 100%; object-fit: cover; display: block;
   transition: transform 0.6s cubic-bezier(0.22,1,0.36,1);
-  image-rendering: -webkit-optimize-contrast; /* Safari/Chrome — melhor downscaling */
-  image-rendering: smooth;                    /* padrão moderno */
-  -ms-interpolation-mode: bicubic;            /* IE fallback */
 }
 .gift-card:hover .gift-img-wrap img { transform: scale(1.06); }
 
@@ -446,6 +443,9 @@ footer { background: var(--charcoal); color: var(--white); padding: 64px 60px; t
   /* Confirmar Presença */
   .rsvp-card { flex-direction: column; padding: 40px 32px; text-align: center; gap: 28px; }
   .rsvp-card-desc { max-width: 100%; }
+
+  /* Gifts extra */
+  .gifts-extra { flex-direction: column; align-items: flex-start; padding: 40px 32px; gap: 24px; }
 }
 
 
@@ -544,6 +544,10 @@ footer { background: var(--charcoal); color: var(--white); padding: 64px 60px; t
   .rsvp-card        { padding: 32px 24px; }
   .rsvp-card-title  { font-size: 22px; }
   .btn-whatsapp     { width: 100%; justify-content: center; }
+
+  /* Gifts extra */
+  .gifts-extra         { padding: 32px 24px; }
+  .gifts-extra .btn-whatsapp { width: 100%; justify-content: center; }
 
   /* Footer */
   footer        { padding: 48px 24px; }
