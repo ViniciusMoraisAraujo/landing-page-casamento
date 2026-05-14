@@ -13,7 +13,42 @@
 })();
 
 // NAV
-window.addEventListener('scroll',()=>document.getElementById('navbar').classList.toggle('scrolled',scrollY>60));
+const navScrollHandler = () => document.getElementById('navbar').classList.toggle('scrolled', scrollY > 60);
+window.addEventListener('scroll', navScrollHandler);
+navScrollHandler();
+
+// HERO PARALLAX
+(function () {
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const heroImg = document.querySelector('.hero-photo img');
+  const hero = heroImg && heroImg.closest('.hero-photo');
+
+  if (reducedMotion || !heroImg || !hero) return;
+
+  let ticking = false;
+
+  function updateParallax() {
+    const rect = hero.getBoundingClientRect();
+    const isVisible = rect.bottom > 0 && rect.top < window.innerHeight;
+
+    if (isVisible) {
+      const offset = Math.min(window.scrollY * 0.12, 40);
+      heroImg.style.setProperty('--hero-parallax-y', `${offset}px`);
+    }
+
+    ticking = false;
+  }
+
+  function requestParallaxUpdate() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(updateParallax);
+  }
+
+  window.addEventListener('scroll', requestParallaxUpdate, { passive: true });
+  window.addEventListener('resize', requestParallaxUpdate);
+  requestParallaxUpdate();
+})();
 
 // REVEAL
 const obs = new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&e.target.classList.add('visible')),{threshold:0.12});
