@@ -19,6 +19,59 @@ window.addEventListener('scroll',()=>document.getElementById('navbar').classList
 const obs = new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&e.target.classList.add('visible')),{threshold:0.12});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 
+
+// CUSTOM CURSOR
+(function () {
+  const supportsCursor = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+  if (!supportsCursor) return;
+
+  const cursor = document.querySelector('.custom-cursor');
+  if (!cursor) return;
+
+  const hoverTargets = 'a, button, .gift-card, .btn-map';
+  let mouseX = -100;
+  let mouseY = -100;
+  let frameId = null;
+
+  function updateCursor() {
+    frameId = null;
+    const offset = cursor.classList.contains('is-hovering') ? 14 : 9;
+    cursor.style.transform = `translate3d(${mouseX - offset}px, ${mouseY - offset}px, 0)`;
+  }
+
+  function scheduleUpdate(event) {
+    mouseX = event.clientX;
+    mouseY = event.clientY;
+    cursor.classList.add('is-visible');
+
+    if (frameId === null) {
+      frameId = requestAnimationFrame(updateCursor);
+    }
+  }
+
+  window.addEventListener('mousemove', scheduleUpdate, { passive: true });
+  document.addEventListener('mouseover', (event) => {
+    if (event.target.closest(hoverTargets)) {
+      cursor.classList.add('is-hovering');
+      if (frameId === null) {
+        frameId = requestAnimationFrame(updateCursor);
+      }
+    }
+  });
+  document.addEventListener('mouseout', (event) => {
+    const target = event.target.closest(hoverTargets);
+
+    if (target && !target.contains(event.relatedTarget)) {
+      cursor.classList.remove('is-hovering');
+      if (frameId === null) {
+        frameId = requestAnimationFrame(updateCursor);
+      }
+    }
+  });
+  document.addEventListener('mouseleave', () => cursor.classList.remove('is-visible'));
+})();
+
 // GIFTS
 const gifts = [
   { name:'Cota Lua de Mel',     price:'R$ 200,00', img:'/assets/lua-de-mel.png', pix:'analuizaalves188@gmail.com' },
