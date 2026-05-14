@@ -47,6 +47,40 @@ body {
   transition: background 0.35s, color 0.35s;
 }
 
+.custom-cursor { display: none; }
+
+@media (hover: hover) and (pointer: fine) {
+  .custom-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 18px;
+    height: 18px;
+    border: 1px solid var(--sage);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0;
+    transform: translate3d(-100px, -100px, 0);
+    transition: width 0.18s ease, height 0.18s ease, border-color 0.18s ease, background-color 0.18s ease, opacity 0.18s ease;
+    will-change: transform;
+  }
+
+  .custom-cursor.is-visible { opacity: 1; }
+
+  .custom-cursor.is-hovering {
+    width: 28px;
+    height: 28px;
+    border-color: var(--text);
+    background-color: rgba(0, 103, 79, 0.08);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .custom-cursor { transition: none; }
+}
+
 
 /* ============================================================
    NAV
@@ -148,14 +182,17 @@ nav.scrolled { border-color: var(--border); }
   z-index: 0;
   height: 85vh; margin-left: 30px;
   border-radius: 24px;
+  overflow: hidden;
   opacity: 0; transform: translateX(-30px);
   animation: fadeLeft 1.2s cubic-bezier(0.22,1,0.36,1) 0.2s forwards;
   /* clip-path garante corte limpo sem franja de sub-pixel */
   clip-path: inset(0 round 24px);
 }
 .hero-photo img {
-  width: 100%; height: 100%; object-fit: cover; display: block;
+  width: 100%; height: calc(100% + 80px); margin-top: -40px; object-fit: cover; display: block;
   filter: brightness(1.05) contrast(0.90);
+  transform: translate3d(0, var(--hero-parallax-y, 0px), 0) scale(1.04);
+  will-change: transform;
 }
 .hero-photo::after {
   content: ''; position: absolute; inset: 0;
@@ -507,6 +544,16 @@ footer { background: var(--panel-bg); color: var(--panel-text); padding: 64px 60
 .d2 { transition-delay: 0.22s; }
 .d3 { transition-delay: 0.34s; }
 
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-photo img {
+    height: 100%;
+    margin-top: 0;
+    transform: none;
+    transition: none;
+    will-change: auto;
+  }
+}
 
 /* ============================================================
    RESPONSIVO — TABLET (≤ 960px)
