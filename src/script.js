@@ -142,3 +142,27 @@ navLinks.querySelectorAll('a').forEach(link => {
     navbar.classList.remove('nav-open');
   });
 });
+
+// THEME
+(function () {
+  const root = document.documentElement;
+  const btn  = document.getElementById('theme-toggle');
+  const icon = document.getElementById('theme-icon');
+
+  // Detecta preferência do sistema e verifica localStorage
+  const saved = localStorage.getItem('theme');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const initial = saved || (prefersDark ? 'dark' : 'light');
+
+  function apply(theme) {
+    root.setAttribute('data-theme', theme);
+    icon.textContent = theme === 'dark' ? '☀️' : '🌙';
+    localStorage.setItem('theme', theme);
+  }
+
+  apply(initial);
+
+  btn.addEventListener('click', () => {
+    apply(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  });
+})();
