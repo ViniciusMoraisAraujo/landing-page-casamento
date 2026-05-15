@@ -104,7 +104,7 @@ if (heroPetals && !prefersReducedMotion) {
   const cursor = document.querySelector('.custom-cursor');
   if (!cursor) return;
 
-  const hoverTargets = 'a, button, .gift-card, .btn-map';
+  const hoverTargets = 'a, button, .gift-card, .btn-map, .gallery-item';
   let mouseX = -100;
   let mouseY = -100;
   let frameId = null;
@@ -145,6 +145,86 @@ if (heroPetals && !prefersReducedMotion) {
     }
   });
   document.addEventListener('mouseleave', () => cursor.classList.remove('is-visible'));
+})();
+
+
+// GALLERY LIGHTBOX
+(function () {
+  const galleryItems = Array.from(document.querySelectorAll('.gallery-item'));
+  if (!galleryItems.length) return;
+
+  const lightbox = document.createElement('div');
+  lightbox.className = 'gallery-lightbox';
+  lightbox.setAttribute('role', 'dialog');
+  lightbox.setAttribute('aria-modal', 'true');
+  lightbox.setAttribute('aria-label', 'Foto ampliada da galeria');
+  lightbox.setAttribute('aria-hidden', 'true');
+  lightbox.innerHTML = `
+    <div class="gallery-lightbox-backdrop" data-gallery-close></div>
+    <div class="gallery-lightbox-box">
+      <button class="gallery-lightbox-close" type="button" aria-label="Fechar foto ampliada" data-gallery-close>
+        <svg class="icon-line" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5" aria-hidden="true">
+          <path d="M6.75 6.75 17.25 17.25M17.25 6.75 6.75 17.25" />
+        </svg>
+      </button>
+      <img class="gallery-lightbox-img" src="" alt="">
+    </div>
+  `;
+  document.body.appendChild(lightbox);
+
+  const lightboxImg = lightbox.querySelector('.gallery-lightbox-img');
+  const closeButton = lightbox.querySelector('.gallery-lightbox-close');
+  let lastFocusedElement = null;
+
+  function openGalleryLightbox(img) {
+    lastFocusedElement = document.activeElement;
+    lightboxImg.src = img.currentSrc || img.src;
+    lightboxImg.alt = img.alt;
+    lightbox.classList.add('open');
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    closeButton.focus();
+  }
+
+  function closeGalleryLightbox() {
+    if (!lightbox.classList.contains('open')) return;
+
+    lightbox.classList.remove('open');
+    lightbox.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    lightboxImg.removeAttribute('src');
+
+    if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
+      lastFocusedElement.focus();
+    }
+  }
+
+  galleryItems.forEach((item) => {
+    const img = item.querySelector('img');
+    if (!img) return;
+
+    item.setAttribute('aria-label', `Ampliar foto: ${img.alt}`);
+    item.addEventListener('click', () => openGalleryLightbox(img));
+  });
+
+  lightbox.addEventListener('click', (event) => {
+    if (event.target.closest('[data-gallery-close]')) {
+      closeGalleryLightbox();
+    }
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (!lightbox.classList.contains('open')) return;
+
+    if (event.key === 'Escape') {
+      closeGalleryLightbox();
+    }
+
+    if (event.key === 'Tab') {
+      event.preventDefault();
+      closeButton.focus();
+    }
+  });
 })();
 
 // GIFTS
