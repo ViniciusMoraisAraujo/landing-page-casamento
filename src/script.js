@@ -68,6 +68,7 @@ const obs = new IntersectionObserver((entries, observer) => {
 document.querySelectorAll('.reveal').forEach((el) => {
   if (prefersReducedMotion) {
     revealElement(el);
+    return;
   }
 
   obs.observe(el);

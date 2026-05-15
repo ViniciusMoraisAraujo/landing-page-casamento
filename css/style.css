@@ -643,7 +643,7 @@ footer { background: var(--panel-bg); color: var(--panel-text); padding: 64px 60
   *::before,
   *::after {
     animation: none !important;
-    transition-duration: 0.01ms !important;
+    transition-duration: 0s !important;
     transition-delay: 0s !important;
   }
 
