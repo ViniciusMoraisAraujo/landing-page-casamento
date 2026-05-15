@@ -296,7 +296,29 @@ section { padding: 120px 60px; }
   font-size: clamp(36px, 4vw, 54px); font-weight: 300; line-height: 1.2; margin-bottom: 24px;
 }
 .divider { width: 48px; height: 1px; background: var(--border); margin: 32px 0; }
-
+.ornament-divider {
+  display: flex;
+  align-items: center;
+  width: 96px;
+  height: 14px;
+  margin: 28px 0 32px;
+  background:
+    radial-gradient(circle, var(--sage) 0 2.5px, transparent 3px) center / 8px 8px no-repeat;
+}
+.ornament-divider::before,
+.ornament-divider::after {
+  content: '';
+  display: block;
+  width: 42px;
+  height: 100%;
+  background:
+    linear-gradient(var(--border), var(--border)) center / 100% 1px no-repeat,
+    radial-gradient(circle, var(--text-light) 0 1.5px, transparent 2px) right center / 5px 5px no-repeat;
+}
+.ornament-divider::after {
+  margin-left: auto;
+  transform: scaleX(-1);
+}
 
 /* ============================================================
    ABOUT
@@ -331,6 +353,12 @@ section { padding: 120px 60px; }
 .about-text-panel .section-title { color: var(--panel-text); margin-bottom: 0; }
 .about-text-panel .section-title em { font-style: italic; color: var(--sage); }
 .about-text-panel .divider { background: var(--panel-border); }
+.about-text-panel .ornament-divider::before,
+.about-text-panel .ornament-divider::after {
+  background:
+    linear-gradient(var(--panel-border), var(--panel-border)) center / 100% 1px no-repeat,
+    radial-gradient(circle, var(--text-light) 0 1.5px, transparent 2px) right center / 5px 5px no-repeat;
+}
 .about-story { font-size: 16px; line-height: 1.6; color: var(--panel-text-muted); font-weight: 300; }
 .about-story strong { color: var(--panel-text); font-weight: 400; }
 
