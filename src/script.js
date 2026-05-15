@@ -54,6 +54,26 @@ navScrollHandler();
 const obs = new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&e.target.classList.add('visible')),{threshold:0.12});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 
+// HERO PETALS
+const heroPetals = document.querySelector('.hero-petals');
+const petalCount = 12;
+
+if (heroPetals) {
+  for (let i = 0; i < petalCount; i++) {
+    const petal = document.createElement('span');
+    petal.className = 'hero-petal';
+    petal.style.setProperty('--x', `${8 + Math.random() * 84}%`);
+    petal.style.setProperty('--duration', `${18 + Math.random() * 12}s`);
+    petal.style.setProperty('--delay', `${Math.random() * -24}s`);
+    petal.style.setProperty('--size', `${8 + Math.random() * 8}px`);
+    petal.style.setProperty('--opacity', `${0.14 + Math.random() * 0.18}`);
+    const drift = Math.random() * 70 - 35;
+    petal.style.setProperty('--drift', `${drift}px`);
+    petal.style.setProperty('--drift-mid', `${drift * -0.45}px`);
+    petal.style.setProperty('--rotation', `${Math.random() * 80 - 40}deg`);
+    heroPetals.appendChild(petal);
+  }
+}
 
 // CUSTOM CURSOR
 (function () {
