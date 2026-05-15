@@ -12,6 +12,8 @@
   tick(); setInterval(tick,1000);
 })();
 
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 // NAV
 const navScrollHandler = () => document.getElementById('navbar').classList.toggle('scrolled', scrollY > 60);
 window.addEventListener('scroll', navScrollHandler);
@@ -19,11 +21,10 @@ navScrollHandler();
 
 // HERO PARALLAX
 (function () {
-  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const heroImg = document.querySelector('.hero-photo img');
   const hero = heroImg && heroImg.closest('.hero-photo');
 
-  if (reducedMotion || !heroImg || !hero) return;
+  if (prefersReducedMotion || !heroImg || !hero) return;
 
   let ticking = false;
 
@@ -51,14 +52,32 @@ navScrollHandler();
 })();
 
 // REVEAL
-const obs = new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&e.target.classList.add('visible')),{threshold:0.12});
-document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+function revealElement(el) {
+  el.classList.add('visible', 'is-visible');
+}
+
+const obs = new IntersectionObserver((entries, observer) => {
+  entries.forEach((entry) => {
+    if (!entry.isIntersecting) return;
+
+    revealElement(entry.target);
+    observer.unobserve(entry.target);
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.reveal').forEach((el) => {
+  if (prefersReducedMotion) {
+    revealElement(el);
+  }
+
+  obs.observe(el);
+});
 
 // HERO PETALS
 const heroPetals = document.querySelector('.hero-petals');
 const petalCount = 12;
 
-if (heroPetals) {
+if (heroPetals && !prefersReducedMotion) {
   for (let i = 0; i < petalCount; i++) {
     const petal = document.createElement('span');
     petal.className = 'hero-petal';
@@ -143,15 +162,18 @@ const delays = ['d1','d2','d3'];
 
 gifts.forEach((g,i)=>{
   const card = document.createElement('div');
-  card.className = `gift-card reveal ${delays[i%3]}`;
+  card.className = `gift-card reveal reveal-scale ${delays[i%3]}`;
   draw(card, g, i);
   grid.appendChild(card);
+  if (prefersReducedMotion) {
+    revealElement(card);
+  }
   obs.observe(card);
 });
 
 // PIX banner
 const pix = document.createElement('div');
-pix.className = 'pix-banner reveal';
+pix.className = 'pix-banner reveal reveal-up';
 pix.innerHTML = `
   <div>
     <div class="pix-banner-label">Contribuição especial</div>
@@ -164,6 +186,9 @@ pix.innerHTML = `
   </div>
 `;
 grid.appendChild(pix);
+if (prefersReducedMotion) {
+  revealElement(pix);
+}
 obs.observe(pix);
 
 function draw(card, g, i){
