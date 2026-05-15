@@ -123,7 +123,14 @@ nav.scrolled { border-color: var(--border); }
 
 /* Hambúrguer — escondido por padrão no desktop */
 #nav-toggle    { display: none; }
-.nav-hamburger { display: none; }
+.nav-hamburger {
+  display: none;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+}
 
 .theme-toggle {
   display: flex; align-items: center; gap: 8px;

@@ -272,14 +272,19 @@ const navbar   = document.getElementById('navbar');
 const hamburger = document.querySelector('.nav-hamburger');
 const navLinks  = document.querySelector('.nav-links');
 
+function setMobileMenuExpanded(isExpanded) {
+  navbar.classList.toggle('nav-open', isExpanded);
+  hamburger.setAttribute('aria-expanded', String(isExpanded));
+}
+
 hamburger.addEventListener('click', () => {
-  navbar.classList.toggle('nav-open');
+  setMobileMenuExpanded(!navbar.classList.contains('nav-open'));
 });
 
 // Fecha ao clicar em qualquer link
 navLinks.querySelectorAll('a').forEach(link => {
   link.addEventListener('click', () => {
-    navbar.classList.remove('nav-open');
+    setMobileMenuExpanded(false);
   });
 });
 
