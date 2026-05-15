@@ -860,7 +860,6 @@ footer { background: var(--panel-bg); color: var(--panel-text); padding: 64px 60
   .nav-open .nav-hamburger span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
   /* Hero */
-  #home { overflow-x: clip; }
   .hero-photo { width: calc(100% - 48px); height: 38vh; margin: 0 24px; border-radius: 16px; clip-path: inset(0 round 16px); }
   .hero-photo.reveal-left { --reveal-x: 0; --reveal-y: 18px; }
   .hero-photo::after  { border-radius: 16px; }
