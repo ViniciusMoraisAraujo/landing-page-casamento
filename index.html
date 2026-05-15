@@ -31,7 +31,15 @@
     <li><a href="#confirmar">Presença</a></li>
   </ul>
   <button class="theme-toggle" id="theme-toggle" aria-label="Alternar tema">
-    <span class="theme-toggle-icon" id="theme-icon">🌙</span>
+    <span class="theme-toggle-icon" id="theme-icon" aria-hidden="true">
+      <svg class="icon-line theme-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5">
+        <path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5 7 7 0 1 0 20.5 14.5Z" />
+      </svg>
+      <svg class="icon-line theme-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5">
+        <circle cx="12" cy="12" r="3.75" />
+        <path d="M12 2.75v2.5M12 18.75v2.5M4.42 4.42l1.77 1.77M17.81 17.81l1.77 1.77M2.75 12h2.5M18.75 12h2.5M4.42 19.58l1.77-1.77M17.81 6.19l1.77-1.77" />
+      </svg>
+    </span>
     <div class="theme-toggle-track">
       <div class="theme-toggle-knob"></div>
     </div>
@@ -118,14 +126,24 @@
           <div class="venue-name">Villarejo Eventos</div>
           <div class="venue-sub">Cerimônia &amp; Recepção</div>
           <div class="local-info-row">
-            <div class="local-info-icon">📅</div>
+            <div class="local-info-icon" aria-hidden="true">
+              <svg class="icon-line" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5">
+                <path d="M7 3.75v2.5M17 3.75v2.5M4.75 8.25h14.5" />
+                <rect x="4.75" y="5.75" width="14.5" height="14" rx="2" />
+              </svg>
+            </div>
             <div>
               <div class="local-info-type">Data</div>
               <div class="local-info-value"><strong>19 de Setembro de 2026</strong> — Sábado</div>
             </div>
           </div>
           <div class="local-info-row">
-            <div class="local-info-icon">🕓</div>
+            <div class="local-info-icon" aria-hidden="true">
+              <svg class="icon-line" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5">
+                <circle cx="12" cy="12" r="8.25" />
+                <path d="M12 7.75V12l3 2" />
+              </svg>
+            </div>
             <div>
               <div class="local-info-type">Horário</div>
               <div class="local-info-value">Cerimônia às <strong>16:00h</strong>
@@ -133,7 +151,12 @@
             </div>
           </div>
           <div class="local-info-row">
-            <div class="local-info-icon">📍</div>
+            <div class="local-info-icon" aria-hidden="true">
+              <svg class="icon-line" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5">
+                <path d="M18.25 10.25c0 4.75-6.25 10-6.25 10s-6.25-5.25-6.25-10a6.25 6.25 0 1 1 12.5 0Z" />
+                <circle cx="12" cy="10.25" r="2" />
+              </svg>
+            </div>
             <div>
               <div class="local-info-type">Endereço</div>
               <div class="local-info-value">Avenida Doutor Joaquim Craveiro de Sá, Expansul<br>Aparecida de Goiânia — GO</div>
@@ -162,7 +185,12 @@
       <div class="gifts-grid" id="gifts-grid"></div>
 
       <div class="rsvp-card reveal d2" style="margin-top: 32px;">
-        <div class="rsvp-card-icon">🎁</div>
+        <div class="rsvp-card-icon" aria-hidden="true">
+          <svg class="icon-line" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5">
+            <path d="M4.75 10.25h14.5v9H4.75v-9ZM4.25 6.75h15.5v3.5H4.25v-3.5ZM12 6.75v12.5" />
+            <path d="M12 6.75S10.75 3.5 8.25 4.25C6 4.93 7.25 8 12 6.75ZM12 6.75s1.25-3.25 3.75-2.5C18 4.93 16.75 8 12 6.75Z" />
+          </svg>
+        </div>
         <div class="rsvp-card-text">
           <div class="rsvp-card-title">Outro presente também é muito bem vindo</div>
           <div class="rsvp-card-desc">Caso queira dar um presente diferente ou prefira parcelar, podemos gerar um link de pagamento especialmente para você.</div>
@@ -192,7 +220,12 @@
         Convite individual, apenas com nome na lista!</p>
       </div>
       <div class="rsvp-card reveal d2">
-        <div class="rsvp-card-icon">💬</div>
+        <div class="rsvp-card-icon" aria-hidden="true">
+          <svg class="icon-line" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5">
+            <path d="M5.25 17.25 4.5 20l3.2-1.15a8.5 8.5 0 1 0-2.45-1.6Z" />
+            <path d="M8.75 11.25h6.5M8.75 14.25h4.5" />
+          </svg>
+        </div>
         <div class="rsvp-card-text">
           <div class="rsvp-card-title">Confirmação pelo WhatsApp</div>
           <div class="rsvp-card-desc">Clique no botão abaixo para nos enviar uma mensagem diretamente pelo WhatsApp e confirmar sua presença no nosso grande dia.</div>
