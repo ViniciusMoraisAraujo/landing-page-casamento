@@ -403,10 +403,13 @@ section { padding: 120px 60px; }
 .gift-name { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 400; color: var(--panel-text); margin-bottom: 0; }
 .gift-price {
   display: inline-flex; align-items: center; justify-content: center;
-  padding: 6px 14px; border-radius: 999px;
-  background: color-mix(in srgb, var(--sage) 16%, transparent);
-  color: var(--sage); font-size: 13px; font-weight: 400;
-  margin: 2px 0 20px; letter-spacing: 0.05em;
+  padding: 8px 18px; border-radius: 999px;
+  background: rgba(253, 252, 250, 0.94);
+  color: #1C1B18; border: 1px solid rgba(253, 252, 250, 0.28);
+  font-size: 15px; font-weight: 600; line-height: 1.15;
+  margin: 4px 0 20px; letter-spacing: 0.06em;
+  font-variant-numeric: tabular-nums;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.16);
 }
 
 .gift-btn {
