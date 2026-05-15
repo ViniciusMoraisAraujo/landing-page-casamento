@@ -3,7 +3,7 @@
   const t = new Date('2026-09-19T16:00:00');
   function tick(){
     const d = t - Date.now();
-    if(d<=0){ document.getElementById('countdown').innerHTML='<span style="font-family:Cormorant Garamond,serif;font-size:24px;font-weight:300;color:var(--sage)">Hoje é o grande dia! 🌿</span>'; return; }
+    if(d<=0){ document.getElementById('countdown').innerHTML='<span style="font-family:Cormorant Garamond,serif;font-size:24px;font-weight:300;color:var(--sage)">Hoje é o grande dia!</span>'; return; }
     document.getElementById('cd-d').textContent = String(Math.floor(d/86400000)).padStart(2,'0');
     document.getElementById('cd-h').textContent = String(Math.floor(d%86400000/3600000)).padStart(2,'0');
     document.getElementById('cd-m').textContent = String(Math.floor(d%3600000/60000)).padStart(2,'0');
@@ -68,6 +68,7 @@ const obs = new IntersectionObserver((entries, observer) => {
 document.querySelectorAll('.reveal').forEach((el) => {
   if (prefersReducedMotion) {
     revealElement(el);
+    return;
   }
 
   obs.observe(el);
@@ -167,8 +168,9 @@ gifts.forEach((g,i)=>{
   grid.appendChild(card);
   if (prefersReducedMotion) {
     revealElement(card);
+  } else {
+    obs.observe(card);
   }
-  obs.observe(card);
 });
 
 // PIX banner
@@ -177,7 +179,7 @@ pix.className = 'pix-banner reveal reveal-up';
 pix.innerHTML = `
   <div>
     <div class="pix-banner-label">Contribuição especial</div>
-    <div class="pix-banner-title">Lua de Mel dos Sonhos ✈</div>
+    <div class="pix-banner-title">Lua de Mel dos Sonhos</div>
     <p class="pix-banner-desc">Se preferir, contribua para a nossa viagem dos sonhos. Qualquer valor é recebido com muito amor e gratidão.</p>
   </div>
   <div class="pix-box">
@@ -188,21 +190,22 @@ pix.innerHTML = `
 grid.appendChild(pix);
 if (prefersReducedMotion) {
   revealElement(pix);
+} else {
+  obs.observe(pix);
 }
-obs.observe(pix);
 
 function draw(card, g, i){
   const ok = chosen.has(i);
   card.innerHTML = `
     <div class="gift-img-wrap">
       <img src="${g.img}" alt="${g.name}" loading="lazy"/>
-      ${ok ? '<span class="gift-badge-chosen">Escolhido ✓</span>' : ''}
+      ${ok ? '<span class="gift-badge-chosen">Escolhido</span>' : ''}
     </div>
     <div class="gift-body">
       <div class="gift-name">${g.name}</div>
       <div class="gift-price">${g.price}</div>
       <button class="gift-btn" ${ok?'disabled':''} onclick="pick(${i})">
-        ${ok ? 'Presente escolhido ✓' : 'Presentear'}
+        ${ok ? 'Presente escolhido' : 'Presentear'}
       </button>
     </div>`;
 }
@@ -219,7 +222,11 @@ modal.id = 'pix-modal';
 modal.innerHTML = `
   <div class="pix-modal-backdrop"></div>
   <div class="pix-modal-box">
-    <button class="pix-modal-close" onclick="closeModal()">✕</button>
+    <button class="pix-modal-close" onclick="closeModal()" aria-label="Fechar modal">
+      <svg class="icon-line" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5" aria-hidden="true">
+        <path d="M6.75 6.75 17.25 17.25M17.25 6.75 6.75 17.25" />
+      </svg>
+    </button>
     <div class="pix-modal-label">Presente escolhido</div>
     <div class="pix-modal-gift-name" id="modal-gift-name"></div>
     <div class="pix-modal-price" id="modal-gift-price"></div>
@@ -229,7 +236,7 @@ modal.innerHTML = `
       <div class="pix-modal-key" id="modal-pix-key"></div>
       <button class="pix-modal-copy" id="modal-copy-btn" onclick="copyPix()">Copiar chave</button>
     </div>
-    <p class="pix-modal-thanks">Obrigado pelo carinho! 🌿<br>Cada presente é recebido com muito amor.</p>
+    <p class="pix-modal-thanks">Obrigado pelo carinho!<br>Cada presente é recebido com muito amor.</p>
   </div>
 `;
 document.body.appendChild(modal);
@@ -255,7 +262,7 @@ function copyPix() {
   const key = document.getElementById('modal-pix-key').textContent;
   navigator.clipboard.writeText(key).then(() => {
     const btn = document.getElementById('modal-copy-btn');
-    btn.textContent = 'Copiado ✓';
+    btn.textContent = 'Copiado';
     setTimeout(() => btn.textContent = 'Copiar chave', 2000);
   });
 }
@@ -289,7 +296,7 @@ navLinks.querySelectorAll('a').forEach(link => {
 
   function apply(theme) {
     root.setAttribute('data-theme', theme);
-    icon.textContent = theme === 'dark' ? '☀️' : '🌙';
+    icon.classList.toggle('is-dark', theme === 'dark');
     localStorage.setItem('theme', theme);
   }
 
