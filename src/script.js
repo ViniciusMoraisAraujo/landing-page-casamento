@@ -168,8 +168,9 @@ gifts.forEach((g,i)=>{
   grid.appendChild(card);
   if (prefersReducedMotion) {
     revealElement(card);
+  } else {
+    obs.observe(card);
   }
-  obs.observe(card);
 });
 
 // PIX banner
@@ -189,8 +190,9 @@ pix.innerHTML = `
 grid.appendChild(pix);
 if (prefersReducedMotion) {
   revealElement(pix);
+} else {
+  obs.observe(pix);
 }
-obs.observe(pix);
 
 function draw(card, g, i){
   const ok = chosen.has(i);
