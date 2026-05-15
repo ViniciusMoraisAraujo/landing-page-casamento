@@ -227,7 +227,16 @@ nav.scrolled { border-color: var(--border); }
 }
 .hero-photo::after {
   content: ''; position: absolute; inset: 0;
-  background: linear-gradient(to right, transparent 30%, var(--hero-overlay) 95%);
+  background: linear-gradient(
+    to right,
+    color-mix(in srgb, var(--hero-overlay) 0%, transparent) 0%,
+    color-mix(in srgb, var(--hero-overlay) 0%, transparent) 28%,
+    color-mix(in srgb, var(--hero-overlay) 10%, transparent) 44%,
+    color-mix(in srgb, var(--hero-overlay) 28%, transparent) 60%,
+    color-mix(in srgb, var(--hero-overlay) 55%, transparent) 76%,
+    color-mix(in srgb, var(--hero-overlay) 82%, transparent) 90%,
+    var(--hero-overlay) 100%
+  );
   pointer-events: none;
 }
 
@@ -792,7 +801,18 @@ footer { background: var(--panel-bg); color: var(--panel-text); padding: 64px 60
   /* Hero */
   #home { grid-template-columns: 1fr; grid-template-rows: auto auto; min-height: 100dvh; padding: 0; overflow-x: clip; }
   .hero-photo { order: -1; height: 45vh; margin: 0; border-radius: 0; clip-path: inset(0 round 0px); }
-  .hero-photo::after { background: linear-gradient(to top, var(--hero-overlay) 8%, transparent 60%); }
+  .hero-photo::after {
+    background: linear-gradient(
+      to top,
+      var(--hero-overlay) 0%,
+      color-mix(in srgb, var(--hero-overlay) 82%, transparent) 14%,
+      color-mix(in srgb, var(--hero-overlay) 55%, transparent) 28%,
+      color-mix(in srgb, var(--hero-overlay) 28%, transparent) 42%,
+      color-mix(in srgb, var(--hero-overlay) 10%, transparent) 54%,
+      color-mix(in srgb, var(--hero-overlay) 0%, transparent) 70%,
+      color-mix(in srgb, var(--hero-overlay) 0%, transparent) 100%
+    );
+  }
   .hero-editorial-mark {
     top: calc(45vh + 24px);
     right: 28px;
