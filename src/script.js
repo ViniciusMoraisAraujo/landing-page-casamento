@@ -13,7 +13,9 @@
 })();
 
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const isMobileViewport = window.matchMedia('(max-width: 900px)').matches;
+const isMobileViewport = window.matchMedia('(max-width: 767px)').matches;
+const MOBILE_STAGGER_TOTAL_DELAY_MS = 120;
+const MOBILE_STAGGER_MAX_ITEMS = 4;
 
 // NAV
 const navScrollHandler = () => document.getElementById('navbar').classList.toggle('scrolled', scrollY > 60);
@@ -53,6 +55,43 @@ navScrollHandler();
 })();
 
 // REVEAL
+
+function optimizeStaggerForMobile() {
+  if (!isMobileViewport) return;
+
+  document.querySelectorAll('.stagger-list').forEach((list) => {
+    const items = Array.from(list.children);
+    if (!items.length) return;
+
+    if (items.length > MOBILE_STAGGER_MAX_ITEMS) {
+      items.forEach((item) => item.style.setProperty('--reveal-delay', '0s'));
+      return;
+    }
+
+    const stepMs = items.length > 1
+      ? MOBILE_STAGGER_TOTAL_DELAY_MS / (items.length - 1)
+      : 0;
+
+    items.forEach((item, index) => {
+      const delayMs = Math.min(Math.round(index * stepMs), MOBILE_STAGGER_TOTAL_DELAY_MS);
+      item.style.setProperty('--reveal-delay', `${delayMs}ms`);
+    });
+  });
+
+  const criticalSelectors = [
+    '.hero-content.reveal',
+    '.hero-content .reveal',
+    '.hero-cta.reveal',
+    '#confirmar .reveal',
+    '.rsvp-card.reveal'
+  ];
+
+  document.querySelectorAll(criticalSelectors.join(',')).forEach((el) => {
+    el.style.setProperty('--reveal-delay', '0s');
+  });
+}
+
+optimizeStaggerForMobile();
 function capRevealDelayForMobile(el) {
   if (!isMobileViewport) return;
 
@@ -65,8 +104,8 @@ function capRevealDelayForMobile(el) {
   const [, value, unit] = match;
   const delayMs = unit === 's' ? Number(value) * 1000 : Number(value);
 
-  if (!Number.isFinite(delayMs) || delayMs <= 80) return;
-  el.style.setProperty('--reveal-delay', '0.08s');
+  if (!Number.isFinite(delayMs) || delayMs <= MOBILE_STAGGER_TOTAL_DELAY_MS) return;
+  el.style.setProperty('--reveal-delay', `${MOBILE_STAGGER_TOTAL_DELAY_MS}ms`);
 }
 
 function revealElement(el) {
