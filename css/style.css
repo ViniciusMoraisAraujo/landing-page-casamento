@@ -1055,6 +1055,8 @@ footer { background: var(--panel-bg); color: var(--panel-text); padding: 64px 60
 }
 
 @media (max-width: 767px) {
+  .stagger-list > * { --reveal-delay: 0s; }
+
   .reveal,
   .stagger-list > * {
     --reveal-y: 12px;
