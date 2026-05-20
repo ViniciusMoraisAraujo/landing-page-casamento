@@ -13,6 +13,7 @@
 })();
 
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const isMobileViewport = window.matchMedia('(max-width: 900px)').matches;
 
 // NAV
 const navScrollHandler = () => document.getElementById('navbar').classList.toggle('scrolled', scrollY > 60);
@@ -52,7 +53,24 @@ navScrollHandler();
 })();
 
 // REVEAL
+function capRevealDelayForMobile(el) {
+  if (!isMobileViewport) return;
+
+  const rawDelay = getComputedStyle(el).getPropertyValue('--reveal-delay').trim();
+  if (!rawDelay) return;
+
+  const match = rawDelay.match(/^([\d.]+)(ms|s)$/);
+  if (!match) return;
+
+  const [, value, unit] = match;
+  const delayMs = unit === 's' ? Number(value) * 1000 : Number(value);
+
+  if (!Number.isFinite(delayMs) || delayMs <= 80) return;
+  el.style.setProperty('--reveal-delay', '0.08s');
+}
+
 function revealElement(el) {
+  capRevealDelayForMobile(el);
   el.classList.add('visible', 'is-visible');
 }
 
@@ -63,7 +81,10 @@ const obs = new IntersectionObserver((entries, observer) => {
     revealElement(entry.target);
     observer.unobserve(entry.target);
   });
-}, { threshold: 0.12 });
+}, {
+  rootMargin: '0px 0px -18% 0px',
+  threshold: 0.05,
+});
 
 document.querySelectorAll('.reveal').forEach((el) => {
   if (prefersReducedMotion) {
