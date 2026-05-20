@@ -544,7 +544,9 @@ section { padding: 120px 60px; }
   margin-top: 32px; padding: 14px 32px;
   border: 1px solid var(--text); color: var(--text);
   font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
-  text-decoration: none; transition: all 0.3s; font-family: 'Jost', sans-serif;
+  text-decoration: none;
+  transition: background-color 0.3s, color 0.3s;
+  font-family: 'Jost', sans-serif;
 }
 .btn-map:hover { background: var(--text); color: var(--bg); }
 
@@ -1050,4 +1052,31 @@ footer { background: var(--panel-bg); color: var(--panel-text); padding: 64px 60
   /* Footer */
   footer        { padding: 48px 24px; }
   .footer-names { font-size: 30px; }
+}
+
+@media (max-width: 767px) {
+  .reveal,
+  .stagger-list > * {
+    --reveal-y: 12px;
+    --reveal-blur: 3px;
+    transition-duration: 0.28s;
+    transition-timing-function: ease-out;
+  }
+
+  .reveal-up { --reveal-y: 14px; }
+  .reveal-left { --reveal-x: -14px; --reveal-y: 0; }
+  .reveal-right { --reveal-x: 14px; --reveal-y: 0; }
+  .reveal-scale { --reveal-y: 10px; --reveal-scale: 0.98; }
+
+  .hero-content.reveal,
+  .hero-names.reveal,
+  .hero-date.reveal,
+  .hero-label.reveal,
+  .hero-cta.reveal,
+  .hero-content .reveal {
+    opacity: 1;
+    filter: none;
+    transform: none;
+    transition: none;
+  }
 }
